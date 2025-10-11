@@ -1,0 +1,15 @@
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/bin/Debug/net9.0/ConsoleApp
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/bin/Debug/net9.0/ConsoleApp.deps.json
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/bin/Debug/net9.0/ConsoleApp.runtimeconfig.json
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/bin/Debug/net9.0/ConsoleApp.dll
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/bin/Debug/net9.0/ConsoleApp.pdb
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/ConsoleApp.AssemblyInfoInputs.cache
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/ConsoleApp.AssemblyInfo.cs
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/ConsoleApp.csproj.CoreCompileInputs.cache
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/ConsoleApp.sourcelink.json
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/ConsoleApp.dll
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/refint/ConsoleApp.dll
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/ConsoleApp.pdb
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/ConsoleApp.genruntimeconfig.cache
+/Users/hyuno/dev/dot-net/study-dotnet/PracticalApps/ConsoleApp/obj/Debug/net9.0/ref/ConsoleApp.dll
