@@ -1,6 +1,276 @@
 # study.dotnet
 
 ## 문법 정리
+### 숫자 관련 문법
+```C#
+ // 1. 숫자 관련 문법
+    static void NumberExamples()
+    {
+        // 기본 타입
+        int intNum = 42;
+        long longNum = 1234567890L;
+        float floatNum = 3.14f;
+        double doubleNum = 3.141592;
+        decimal decimalNum = 99.99m;
+        
+        Console.WriteLine($"int: {intNum}");
+        Console.WriteLine($"long: {longNum}");
+        Console.WriteLine($"float: {floatNum}");
+        Console.WriteLine($"double: {doubleNum}");
+        Console.WriteLine($"decimal: {decimalNum}");
+        
+        // 산술 연산
+        int a = 10, b = 3;
+        Console.WriteLine($"\n산술 연산: {a} + {b} = {a + b}");
+        Console.WriteLine($"{a} - {b} = {a - b}");
+        Console.WriteLine($"{a} * {b} = {a * b}");
+        Console.WriteLine($"{a} / {b} = {a / b}");
+        Console.WriteLine($"{a} % {b} = {a % b}");
+        
+        // Math 클래스
+        Console.WriteLine($"\nMath.Pow(2, 3) = {Math.Pow(2, 3)}");
+        Console.WriteLine($"Math.Sqrt(16) = {Math.Sqrt(16)}");
+        Console.WriteLine($"Math.Max(5, 10) = {Math.Max(5, 10)}");
+        Console.WriteLine($"Math.Min(5, 10) = {Math.Min(5, 10)}");
+        Console.WriteLine($"Math.Abs(-15) = {Math.Abs(-15)}");
+        Console.WriteLine($"Math.Round(3.7) = {Math.Round(3.7)}");
+        Console.WriteLine($"Math.Ceiling(3.1) = {Math.Ceiling(3.1)}");
+        Console.WriteLine($"Math.Floor(3.9) = {Math.Floor(3.9)}");
+        
+        // 형변환
+        string numStr = "123";
+        int parsed = int.Parse(numStr);
+        Console.WriteLine($"\nint.Parse(\"123\") = {parsed}");
+        
+        bool success = int.TryParse("456", out int result);
+        Console.WriteLine($"TryParse \"456\" = {r
+```
+
+###  문자열 관련 문법
+```C#
+static void StringExamples()
+    {
+        string str = "Hello, World!";
+        Console.WriteLine($"원본 문자열: {str}");
+        
+        // 문자열 속성
+        Console.WriteLine($"Length: {str.Length}");
+        Console.WriteLine($"첫 문자: {str[0]}");
+        
+        // 문자열 메서드
+        Console.WriteLine($"\nToUpper: {str.ToUpper()}");
+        Console.WriteLine($"ToLower: {str.ToLower()}");
+        Console.WriteLine($"Contains 'World': {str.Contains("World")}");
+        Console.WriteLine($"StartsWith 'Hello': {str.StartsWith("Hello")}");
+        Console.WriteLine($"EndsWith '!': {str.EndsWith("!")}");
+        Console.WriteLine($"IndexOf 'World': {str.IndexOf("World")}");
+        Console.WriteLine($"Substring(7, 5): {str.Substring(7, 5)}");
+        Console.WriteLine($"Replace 'World' -> 'C#': {str.Replace("World", "C#")}");
+        
+        // 문자열 분할과 결합
+        string csv = "apple,banana,orange";
+        string[] fruits = csv.Split(',');
+        Console.WriteLine($"\nSplit: {string.Join(" | ", fruits)}");
+        
+        string joined = string.Join(", ", fruits);
+        Console.WriteLine($"Join: {joined}");
+        
+        // 문자열 보간
+        string name = "홍길동";
+        int age = 30;
+        Console.WriteLine($"\n문자열 보간: 이름은 {name}이고 나이는 {age}세입니다.");
+        
+        // Trim
+        string padded = "  spaces  ";
+        Console.WriteLine($"Trim: '{padded.Trim()}'");
+        Console.WriteLine($"TrimStart: '{padded.TrimStart()}'");
+        Console.WriteLine($"TrimEnd: '{padded.TrimEnd()}'");
+        
+        // 포맷팅
+        double price = 1234.56;
+        Console.WriteLine($"\n통화 포맷: {price:C}");
+        Console.WriteLine($"숫자 포맷: {price:N2}");
+        Console.WriteLine($"퍼센트: {0.85:P}");
+    }
+```
+
+### 컬렉션 관련 문법
+```C#
+ static void CollectionExamples()
+    {
+        // List<T>
+        Console.WriteLine("List<T>:");
+        List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+        numbers.Add(6);
+        numbers.AddRange(new[] { 7, 8, 9 });
+        numbers.Insert(0, 0);
+        Console.WriteLine($"  초기: {string.Join(", ", numbers)}");
+        Console.WriteLine($"  Count: {numbers.Count}");
+        Console.WriteLine($"  Contains(5): {numbers.Contains(5)}");
+        Console.WriteLine($"  IndexOf(5): {numbers.IndexOf(5)}");
+        numbers.Remove(5);
+        numbers.RemoveAt(0);
+        Console.WriteLine($"  Remove 후: {string.Join(", ", numbers)}");
+        
+        // Dictionary<TKey, TValue>
+        Console.WriteLine("\nDictionary<TKey, TValue>:");
+        Dictionary<string, int> ages = new Dictionary<string, int>
+        {
+            { "홍길동", 30 },
+            { "김철수", 25 },
+            { "이영희", 28 }
+        };
+        ages["박민수"] = 32;
+        
+        foreach (var kvp in ages)
+        {
+            Console.WriteLine($"  {kvp.Key}: {kvp.Value}세");
+        }
+        Console.WriteLine($"  ContainsKey('홍길동'): {ages.ContainsKey("홍길동")}");
+        Console.WriteLine($"  TryGetValue('김철수'): {ages.TryGetValue("김철수", out int age)} (값: {age})");
+        
+        // HashSet<T>
+        Console.WriteLine("\nHashSet<T>:");
+        HashSet<int> set1 = new HashSet<int> { 1, 2, 3, 4, 5 };
+        HashSet<int> set2 = new HashSet<int> { 4, 5, 6, 7, 8 };
+        
+        set1.Add(10);
+        Console.WriteLine($"  set1: {string.Join(", ", set1)}");
+        Console.WriteLine($"  set2: {string.Join(", ", set2)}");
+        
+        HashSet<int> union = new HashSet<int>(set1);
+        union.UnionWith(set2);
+        Console.WriteLine($"  합집합: {string.Join(", ", union)}");
+        
+        HashSet<int> intersect = new HashSet<int>(set1);
+        intersect.IntersectWith(set2);
+        Console.WriteLine($"  교집합: {string.Join(", ", intersect)}");
+        
+        // Queue<T>
+        Console.WriteLine("\nQueue<T> (FIFO):");
+        Queue<string> queue = new Queue<string>();
+        queue.Enqueue("첫번째");
+        queue.Enqueue("두번째");
+        queue.Enqueue("세번째");
+        Console.WriteLine($"  Peek: {queue.Peek()}");
+        Console.WriteLine($"  Dequeue: {queue.Dequeue()}");
+        Console.WriteLine($"  남은 항목: {string.Join(", ", queue)}");
+        
+        // Stack<T>
+        Console.WriteLine("\nStack<T> (LIFO):");
+        Stack<string> stack = new Stack<string>();
+        stack.Push("첫번째");
+        stack.Push("두번째");
+        stack.Push("세번째");
+        Console.WriteLine($"  Peek: {stack.Peek()}");
+        Console.WriteLine($"  Pop: {stack.Pop()}");
+        Console.WriteLine($"  남은 항목: {string.Join(", ", stack)}");
+    }
+```
+
+### LINQ 관련 문법
+```C#
+static void LinqExamples()
+    {
+        List<int> nums = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        
+        // Where (필터링)
+        var evens = nums.Where(n => n % 2 == 0);
+        Console.WriteLine($"짝수: {string.Join(", ", evens)}");
+        
+        // Select (변환)
+        var squares = nums.Select(n => n * n);
+        Console.WriteLine($"제곱: {string.Join(", ", squares)}");
+        
+        // OrderBy / OrderByDescending
+        var desc = nums.OrderByDescending(n => n);
+        Console.WriteLine($"내림차순: {string.Join(", ", desc)}");
+        
+        // First, FirstOrDefault, Last
+        Console.WriteLine($"First: {nums.First()}");
+        Console.WriteLine($"Last: {nums.Last()}");
+        Console.WriteLine($"First > 5: {nums.First(n => n > 5)}");
+        
+        // Any, All
+        Console.WriteLine($"Any > 5: {nums.Any(n => n > 5)}");
+        Console.WriteLine($"All > 0: {nums.All(n => n > 0)}");
+        
+        // Count, Sum, Average, Min, Max
+        Console.WriteLine($"Count: {nums.Count()}");
+        Console.WriteLine($"Sum: {nums.Sum()}");
+        Console.WriteLine($"Average: {nums.Average()}");
+        Console.WriteLine($"Min: {nums.Min()}");
+        Console.WriteLine($"Max: {nums.Max()}");
+        
+        // Take, Skip
+        var first3 = nums.Take(3);
+        Console.WriteLine($"Take(3): {string.Join(", ", first3)}");
+        
+        var skip5 = nums.Skip(5);
+        Console.WriteLine($"Skip(5): {string.Join(", ", skip5)}");
+        
+        // Distinct
+        List<int> duplicates = new List<int> { 1, 2, 2, 3, 3, 3, 4 };
+        var unique = duplicates.Distinct();
+        Console.WriteLine($"Distinct: {string.Join(", ", unique)}");
+        
+        // GroupBy
+        List<Student> students = new List<Student>
+        {
+            new Student { Name = "홍길동", Grade = "A" },
+            new Student { Name = "김철수", Grade = "B" },
+            new Student { Name = "이영희", Grade = "A" },
+            new Student { Name = "박민수", Grade = "C" },
+            new Student { Name = "정수진", Grade = "B" }
+        };
+        
+        var grouped = students.GroupBy(s => s.Grade);
+        Console.WriteLine("\nGroupBy 학점:");
+        foreach (var group in grouped)
+        {
+            Console.WriteLine($"  {group.Key}: {string.Join(", ", group.Select(s => s.Name))}");
+        }
+        
+        // Join
+        List<Department> departments = new List<Department>
+        {
+            new Department { Id = 1, Name = "개발팀" },
+            new Department { Id = 2, Name = "디자인팀" }
+        };
+        
+        List<Employee> employees = new List<Employee>
+        {
+            new Employee { Name = "홍길동", DeptId = 1 },
+            new Employee { Name = "김철수", DeptId = 2 },
+            new Employee { Name = "이영희", DeptId = 1 }
+        };
+        
+        var joined = employees.Join(
+            departments,
+            emp => emp.DeptId,
+            dept => dept.Id,
+            (emp, dept) => new { emp.Name, dept.Name }
+        );
+        
+        Console.WriteLine("\nJoin 결과:");
+        foreach (var item in joined)
+        {
+            Console.WriteLine($"  {item.Name} - {item.Name}");
+        }
+        
+        // 쿼리 구문 (Query Syntax)
+        var query = from n in nums
+                    where n > 5
+                    orderby n descending
+                    select n * 2;
+        Console.WriteLine($"\n쿼리 구문: {string.Join(", ", query)}");
+        
+        // Aggregate
+        var product = nums.Take(5).Aggregate((acc, n) => acc * n);
+        Console.WriteLine($"\nAggregate (곱셈): {product}");
+    }
+```
+
 ### 1. 배열 (Array)
 ```C#
 // 1차원 배열
