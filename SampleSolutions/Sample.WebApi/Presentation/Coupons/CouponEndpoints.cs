@@ -22,6 +22,8 @@ public static class CouponEndpoints
                     return Results.BadRequest(new CouponIssueResponse(
                         false,
                         "CouponId 값이 필요합니다.",
+                        null,
+                        null,
                         null));
                 }
 
@@ -30,6 +32,8 @@ public static class CouponEndpoints
                     return Results.BadRequest(new CouponIssueResponse(
                         false,
                         "UserId 값이 필요합니다.",
+                        null,
+                        null,
                         null));
                 }
 
@@ -37,14 +41,17 @@ public static class CouponEndpoints
 
                 return result.Status switch
                 {
-                    CouponIssuanceStatus.Success => Results.Ok(new CouponIssueResponse(true, result.Message, result.RemainingQuantity)),
-                    CouponIssuanceStatus.CouponNotFound => Results.NotFound(new CouponIssueResponse(false, result.Message, null)),
-                    CouponIssuanceStatus.SoldOut => Results.Conflict(new CouponIssueResponse(false, result.Message, 0)),
-                    CouponIssuanceStatus.AlreadyIssued => Results.Conflict(new CouponIssueResponse(false, result.Message, result.RemainingQuantity)),
+                    CouponIssuanceStatus.Success => Results.Ok(new CouponIssueResponse(true, result.Message, result.RemainingQuantity, result.CouponCode, result.IssuedAt)),
+                    CouponIssuanceStatus.CouponNotFound => Results.NotFound(new CouponIssueResponse(false, result.Message, null, null, null)),
+                    CouponIssuanceStatus.SoldOut => Results.Conflict(new CouponIssueResponse(false, result.Message, 0, null, null)),
+                    CouponIssuanceStatus.AlreadyIssued => Results.Conflict(new CouponIssueResponse(false, result.Message, result.RemainingQuantity, null, null)),
                     CouponIssuanceStatus.NotInitialized => Results.Json(
-                        new CouponIssueResponse(false, result.Message, result.RemainingQuantity),
+                        new CouponIssueResponse(false, result.Message, result.RemainingQuantity, null, null),
                         statusCode: StatusCodes.Status503ServiceUnavailable),
-                    _ => Results.BadRequest(new CouponIssueResponse(false, result.Message, result.RemainingQuantity))
+                    CouponIssuanceStatus.InternalError => Results.Json(
+                        new CouponIssueResponse(false, result.Message, result.RemainingQuantity, null, null),
+                        statusCode: StatusCodes.Status500InternalServerError),
+                    _ => Results.BadRequest(new CouponIssueResponse(false, result.Message, result.RemainingQuantity, null, null))
                 };
             })
             .WithName("IssueCoupon")
@@ -55,5 +62,5 @@ public static class CouponEndpoints
 
     private sealed record CouponIssueRequest(string CouponId, string UserId);
 
-    private sealed record CouponIssueResponse(bool Success, string Message, int? RemainingQuantity);
+    private sealed record CouponIssueResponse(bool Success, string Message, int? RemainingQuantity, string? CouponCode, DateTimeOffset? IssuedAt);
 }

@@ -25,4 +25,8 @@ public sealed class CouponDefinitionOptions
 
     [Range(1, int.MaxValue)]
     public int TotalQuantity { get; init; }
+
+    public DateOnly? CampaignStartDate { get; init; }
+
+    public IList<int> WeeklyAllocation { get; init; } = new List<int>();
 }

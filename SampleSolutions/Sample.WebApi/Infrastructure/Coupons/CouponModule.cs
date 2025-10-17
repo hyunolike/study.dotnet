@@ -25,7 +25,9 @@ public static class CouponModule
             return ConnectionMultiplexer.Connect(options);
         });
 
+        services.AddSingleton<ICouponCodeAllocator, MySqlCouponCodeAllocator>();
         services.AddSingleton<ICouponIssuanceService, RedisCouponIssuanceService>();
+        services.AddHostedService<CouponDatabaseInitializer>();
         services.AddHostedService<CouponStockInitializer>();
 
         return services;

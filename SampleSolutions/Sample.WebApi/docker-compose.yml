@@ -13,5 +13,54 @@ services:
       timeout: 5s
       retries: 5
 
+  mysql:
+    image: mysql:8.4
+    container_name: sample-webapi-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=CouponDb
+      - MYSQL_USER=app
+      - MYSQL_PASSWORD=app_password
+    command:
+      - "--mysql-native-password=ON"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: sample-webapi-redisinsight
+    ports:
+      - "5540:5540"
+    volumes:
+      - redisinsight-data:/db
+    depends_on:
+      - redis
+
+  k6:
+    image: grafana/k6:latest
+    container_name: sample-webapi-k6
+    volumes:
+      - ./tests/load:/scripts
+    command: ["run", "/scripts/coupon-issue.js"]
+    environment:
+      - BASE_URL=http://host.docker.internal:5082
+      - COUPON_ID=WELCOME10
+    depends_on:
+      - redis
+      - mysql
+    profiles:
+      - load-test
+
 volumes:
   redis-data:
+  mysql-data:
+  redisinsight-data:

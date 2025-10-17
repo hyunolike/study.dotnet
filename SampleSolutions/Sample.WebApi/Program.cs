@@ -19,7 +19,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+//  API가 HTTPS 포트를 찾지 못하면 HTTP 요청에 403을 돌려버립니다.
+// app.UseHttpsRedirection();
 
 var summaries = new[]
 {
